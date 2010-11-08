@@ -32,7 +32,12 @@ module Delayed
         property :locked_by,   String
         property :failed_at,   Time
         property :last_error,  Text
-                
+        property :locale,      String
+
+        before :save do
+          self.locale = I18n.locale
+        end
+
         def self.db_time_now
           Time.now
         end

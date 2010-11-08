@@ -121,6 +121,7 @@ module Delayed
     end
     
     def run(job)
+      I18n.locale = job.locale
       runtime =  Benchmark.realtime do
         Timeout.timeout(self.class.max_run_time.to_i) { job.invoke_job }
         job.destroy
